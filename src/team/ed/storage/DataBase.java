@@ -5,11 +5,14 @@ import team.ed.objetos.Potato;
 import team.ed.objetos.Product;
 import team.ed.objetos.Rice;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataBase {
 
     private Product[] products;
+    private List<Product> sales;
+    private List<Product> purchases;
 
     public DataBase() {
         products = new Product[3];
@@ -20,6 +23,9 @@ public class DataBase {
         products[0] = potato;
         products[1] = rice;
         products[2] = meat;
+
+        sales = new ArrayList<>();
+        purchases = new ArrayList<>();
     }
 
     private boolean isValidID(int id) {
@@ -33,7 +39,13 @@ public class DataBase {
             return null;
         }
 
-        return products[id];
+        Product r = null;
+        try {
+            r = products[id].clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return r;
     }
 
     // Devuelve todos los productos
@@ -69,7 +81,7 @@ public class DataBase {
         oldProduct.setPrice(p.getPrice());
     }
 
-    public void saleProduct(Product p) {
+    public void saleProduct(Product p, int amount) {
         Product oldProduct;
         switch (p.getClass().getSimpleName()) {
             case "Potato":
@@ -86,6 +98,40 @@ public class DataBase {
                 return;
         }
 
-        oldProduct.setAmount(oldProduct.getAmount() - p.getAmount());
+        oldProduct.setAmount(oldProduct.getAmount() - amount);
+    }
+
+    // Agrega ventas
+    public void addSale(Product p) {
+        sales.add(p);
+    }
+
+    // Devuelve todos los productos vendidos
+    public Product[] getSales() {
+        Product[] list = new Product[sales.size()];
+        for (int i = 0; i < sales.size(); i++) {
+            try {
+                list[i] = products[i].clone();
+            } catch (CloneNotSupportedException ignored) {}
+        }
+
+        return list;
+    }
+
+    // Agrega compras
+    public void addPurchase(Product p) {
+        purchases.add(p);
+    }
+
+    // Devuelve todos los productos comprados
+    public Product[] getPurchases() {
+        Product[] list = new Product[purchases.size()];
+        for (int i = 0; i < purchases.size(); i++) {
+            try {
+                list[i] = products[i].clone();
+            } catch (CloneNotSupportedException ignored) {}
+        }
+
+        return list;
     }
 }
