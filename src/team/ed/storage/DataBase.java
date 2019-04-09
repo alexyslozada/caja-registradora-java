@@ -1,5 +1,6 @@
 package team.ed.storage;
 
+import org.jetbrains.annotations.Contract;
 import team.ed.objetos.Meat;
 import team.ed.objetos.Potato;
 import team.ed.objetos.Product;
@@ -28,6 +29,7 @@ public class DataBase {
         purchases = new ArrayList<>();
     }
 
+    @Contract(pure = true)
     private boolean isValidID(int id) {
         return id >= 0 && id <= 2;
     }
@@ -107,15 +109,8 @@ public class DataBase {
     }
 
     // Devuelve todos los productos vendidos
-    public Product[] getSales() {
-        Product[] list = new Product[sales.size()];
-        for (int i = 0; i < sales.size(); i++) {
-            try {
-                list[i] = products[i].clone();
-            } catch (CloneNotSupportedException ignored) {}
-        }
-
-        return list;
+    public List<Product> getSales() {
+        return sales;
     }
 
     // Agrega compras
@@ -124,14 +119,7 @@ public class DataBase {
     }
 
     // Devuelve todos los productos comprados
-    public Product[] getPurchases() {
-        Product[] list = new Product[purchases.size()];
-        for (int i = 0; i < purchases.size(); i++) {
-            try {
-                list[i] = products[i].clone();
-            } catch (CloneNotSupportedException ignored) {}
-        }
-
-        return list;
+    public List<Product> getPurchases() {
+        return purchases;
     }
 }

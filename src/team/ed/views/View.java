@@ -3,6 +3,7 @@ package team.ed.views;
 import team.ed.objetos.Product;
 import team.ed.test.Color;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -63,6 +64,41 @@ public class View {
         }
         System.out.print(Color.RESET);
     }
+
+    public void showSales(List<Product> products) {
+        System.out.print(Color.YELLOW);
+        System.out.println("\t\t*****************************************************");
+        System.out.println("\t\t*                  V E N T A S                      *");
+        System.out.println("\t\t*****************************************************");
+        System.out.print(Color.RESET);
+
+        System.out.print(Color.BLUE_BOLD);
+        System.out.println("\t\t-----------------------------------------------------");
+        System.out.println("\t\t* PRODUCTO\t| Cantidad\t| Vr Unitario\t| Vr Total\t*");
+        System.out.println("\t\t-----------------------------------------------------");
+        for (Product v : products) {
+            System.out.println("\t\t* "+v.getName()+"\t| "+v.getAmount()+"\t\t| "+v.getPrice()+"\t\t\t| "+v.getAmount()*v.getPrice()+"\t\t*");
+        }
+        System.out.print(Color.RESET);
+    }
+
+    public void showPurchases(List<Product> products) {
+        System.out.print(Color.YELLOW);
+        System.out.println("\t\t*****************************************************");
+        System.out.println("\t\t*                C O M P R A S                      *");
+        System.out.println("\t\t*****************************************************");
+        System.out.print(Color.RESET);
+
+        System.out.print(Color.BLUE_BOLD);
+        System.out.println("\t\t-----------------------------------------------------");
+        System.out.println("\t\t* PRODUCTO\t| Cantidad\t| Vr Unitario\t| Vr Total\t*");
+        System.out.println("\t\t-----------------------------------------------------");
+        for (Product v : products) {
+            System.out.println("\t\t* "+v.getName()+"\t| "+v.getAmount()+"\t\t| "+v.getPrice()+"\t\t\t| "+v.getAmount()*v.getPrice()+"\t\t*");
+        }
+        System.out.print(Color.RESET);
+    }
+
 
     public void showProductOptions() {
         System.out.print(Color.BLUE_BOLD);

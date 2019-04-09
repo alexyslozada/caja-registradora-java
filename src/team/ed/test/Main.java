@@ -42,12 +42,12 @@ public class Main {
                     teclado.nextInt();
                     break;
                 case 4:
-                    vista.showStock(dataBase.getPurchases());
+                    vista.showPurchases(dataBase.getPurchases());
                     System.out.println("Digite una tecla para continuar...");
                     teclado.nextInt();
                     break;
                 case 5:
-                    vista.showStock(dataBase.getSales());
+                    vista.showSales(dataBase.getSales());
                     System.out.println("Digite una tecla para continuar...");
                     teclado.nextInt();
                     break;
@@ -94,13 +94,13 @@ public class Main {
         Product product = null;
         switch (buyOption) {
             case 1:
-                product = new Potato();
+                product = new Potato("Sabanera");
                 break;
             case 2:
-                product = new Rice();
+                product = new Rice("Calidad");
                 break;
             case 3:
-                product = new Meat();
+                product = new Meat("Lomo fino");
                 break;
             default:
                 System.out.println("Opción no válida");
@@ -126,8 +126,9 @@ public class Main {
         }
         System.out.println(product);
         int amount = vista.getAmount(teclado);
+        product.setAmount(amount);
         product.setPrice(product.getPrice()*1.25);
-        System.out.println("\t\t\tValor a recibir: " + amount * product.getPrice());
+        System.out.println("\t\t\tValor a recibir: " + product.getAmount() * product.getPrice());
         dataBase.addSale(product);
         dataBase.saleProduct(product, amount);
     }
